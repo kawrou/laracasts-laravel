@@ -9,7 +9,12 @@ Route::get('/', function () {
 
 Route::get('/jobs', function () {
     //eager loading to solve n+1 problem
-    $jobs = Job::with('employer')->get();  
+    //Paginate so that not all the data is displayed at once
+    $jobs = Job::with('employer')->paginate(3);  
+    // $jobs = Job::with('employer')->simplePaginate(3);  
+    // $jobs = Job::with('employer')->cursorPaginate(3);  
+   
+    //Lazy loading
     // $jobs = Job::all();  
 
     return view('jobs', [
