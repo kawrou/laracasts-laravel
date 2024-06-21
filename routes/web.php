@@ -10,22 +10,28 @@ Route::get('/', function () {
 Route::get('/jobs', function () {
     //eager loading to solve n+1 problem
     //Paginate so that not all the data is displayed at once
-    $jobs = Job::with('employer')->paginate(3);  
-    // $jobs = Job::with('employer')->simplePaginate(3);  
+    // $jobs = Job::with('employer')->paginate(6);
+    $jobs = Job::with('employer')->simplePaginate(6);  
     // $jobs = Job::with('employer')->cursorPaginate(3);  
-   
+
     //Lazy loading
     // $jobs = Job::all();  
 
-    return view('jobs', [
+    return view('Jobs.index', [
         'jobs' => $jobs
     ]);
 });
 
+Route::get('/jobs/create', function () {
+    return view('Jobs.create');
+});
+
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
-    return view('job', ['job' => $job]);
+    return view('Jobs.show', ['job' => $job]);
 });
+
+
 
 Route::get('/contact', function () {
     return view('contact');
