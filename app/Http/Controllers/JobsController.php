@@ -23,14 +23,14 @@ class JobsController extends Controller
         ]);
     }
 
-    public function create($id)
+    public function create()
     {
         return view('Jobs.create');
     }
 
     public function store(Request $request)
     {
-        request()->validate([
+        $request->validate([
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
