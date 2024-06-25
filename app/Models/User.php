@@ -17,7 +17,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -37,6 +38,9 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    // Intercepts data before it reaches database and does something to it
+    // 'password' gets 'hashed'
     protected function casts(): array
     {
         return [
